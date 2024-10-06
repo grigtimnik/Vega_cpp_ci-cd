@@ -19,3 +19,14 @@ target_link_libraries(tests gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(tests)
+
+
+FetchContent_Declare(
+    googlebenchmark
+    GIT_REPOSITORY https://github.com/google/benchmark.git
+    GIT_TAG v1.9.0
+)
+
+FetchContent_MakeAvailable(googlebenchmark)
+add_executable(benchmark_add benchmark.cpp src/my_add.cpp)
+target_link_libraries(benchmark_add benchmark::benchmark)
