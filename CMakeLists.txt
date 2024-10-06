@@ -30,3 +30,20 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googlebenchmark)
 add_executable(benchmark_add benchmark.cpp src/my_add.cpp)
 target_link_libraries(benchmark_add benchmark::benchmark)
+
+find_package(Doxygen)
+
+if(DOXYGEN_FOUND)
+  set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
+
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doxygen)
+
+  add_custom_target(doc
+                    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_IN}
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                    COMMENT "Generating API documentation with Doxygen"
+                    VERBATIM)
+
+else(DOXYGEN_FOUND)
+  message("Doxygen need to be installed to generate the documentation")
+endif(DOXYGEN_FOUND)
