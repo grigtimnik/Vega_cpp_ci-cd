@@ -13,6 +13,7 @@ jobs:
           path: |
             build/main
             build/tests
+            build/benchmark_add
 
   tests:
     needs: build
